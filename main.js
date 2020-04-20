@@ -32,7 +32,8 @@ const MAX_PARTICLES = 20000,	 	 // The max amount of particles on-screen.
 var particles = [], 			 // Vector used to store and manage all the sand particles created.
 	texture,			 // The texture canvas for dynamical graphics changes.
 	textureData,			 // The raw texture informations.
-	UI;			    	 // A Phaser text instance for UI.
+	UI,			    	 // A Phaser text instance for UI.
+	mouseToggleResolution            // Decides whether the mouse coordinate depends on the resolution (according the browser).
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -57,6 +58,19 @@ function simulationCreate( )
 {
 	// Prevent the default right click menu pop-up.
 	this.input.mouse.disableContextMenu();
+	
+	// By default mouse coordinates depend on resolution.
+	mouseToggleResolution = RESOLUTION;
+	
+	// By pressing key "T", toggle the dependency.
+	this.input.keyboard.on('keydown', function (event) {
+		if(event.key == "t"){
+			if(mouseToggleResolution == 1)
+				mouseToggleResolution = RESOLUTION;
+			else
+				mouseToggleResolution = 1;
+		}		
+	});
 	
 	// Create an empty texture
 	texture = this.textures.createCanvas('surface', simulation.config.width, simulation.config.height);
@@ -96,8 +110,8 @@ function simulationUpdate()
     let pointer = this.input.activePointer;
 	
 	// Get the mouse coordinates.
-	let mouseX = Math.round(pointer.x / RESOLUTION);
-	let mouseY = Math.round(pointer.y / RESOLUTION);
+	let mouseX = Math.round(pointer.x / mouseToggleResolution);
+	let mouseY = Math.round(pointer.y / mouseToggleResolution);
 	
 	// When a mouse button is down
 	if(pointer.isDown) {
