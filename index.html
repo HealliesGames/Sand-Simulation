@@ -1,0 +1,58 @@
+					<!--    >     HealliesGames      <     -->
+					<!--    >   -----------------    <     -->
+					<!--    >    Sand Simulation     <     -->
+					<!--    >   -----------------    <     -->
+					<!--    >  Powered by Phaser 3   <     -->
+
+<!-- This is a simplified example of how well-known particle physics games work. -->
+<!--  The physics is pretty rough, however it can be taken as a starting point.  -->
+
+
+<html>
+	<head>
+		<!-- Title -->
+		<title>Sand Simulation</title>
+		
+		<!-- Import Phaser framework -->
+		<script src = "phaser.min.js"></script>
+		
+		<!-- Main script -->
+		<script src="main.js"></script>
+		
+		<!-- Project setup -->
+		<script>
+			// The canvas zoom resolution (x1, x2, x3, etc...).
+			const RESOLUTION = 3;
+		
+			// The configuration object for setting up Phaser project.
+			var config = {
+				type: Phaser.CANVAS, // Render type (AUTO, CANVAS, WEB_GL).
+				width: 320,			 // Canvas width.
+				height: 240,		 // Canvas height.
+
+				// Assigning methods to our default scene.
+				scene: {
+					create: simulationCreate,
+					update: simulationUpdate
+				},
+				
+				// Set pixel art mode to remove blurring.
+				pixelArt : true,
+				
+				// Apply the zoom resolution.
+			    callbacks: {
+				  postBoot: function (simulation) {
+				    let config = simulation.config;
+				    let style = simulation.canvas.style;
+				    style.width = (RESOLUTION * config.width) + 'px';
+				    style.height = (RESOLUTION * config.height) + 'px';
+				  }
+			    }
+			};
+
+			// Start the simulation.
+			var simulation = new Phaser.Game(config); 
+		</script>
+		
+	</head>
+</html>
