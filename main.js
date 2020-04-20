@@ -59,8 +59,8 @@ function simulationCreate( )
 	// Prevent the default right click menu pop-up.
 	this.input.mouse.disableContextMenu();
 	
-	// By default mouse coordinates depend on resolution.
-	mouseToggleResolution = RESOLUTION;
+	// By default mouse coordinates do not depend on resolution.
+	mouseToggleResolution = 1;
 	
 	// By pressing key "T", toggle the dependency.
 	this.input.keyboard.on('keydown', function (event) {
