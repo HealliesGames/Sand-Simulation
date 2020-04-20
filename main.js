@@ -3,10 +3,10 @@
 /**					<!--    >   -----------------    <     -->					 **/
 /**					<!--    >    Sand Simulation     <     -->					 **/
 /**					<!--    >   -----------------    <     -->					 **/
-/**					<!--    >  Powered by Phaser 3   <     -->                   **/
-/**																				 **/
-/**  This is a simplified example of how well-known particle physics games work. **/
-/**   The physics is pretty rough, however it can be taken as a starting point.  **/
+/**					<!--    >  Powered by Phaser 3   <     -->                   			 **/
+/**															 **/
+/** 			 This is a simplified example of how well-known particle physics games work. 			 **/
+/**   			  The physics is pretty rough, however it can be taken as a starting point.  			 **/
 
 
 
@@ -26,13 +26,13 @@
 /*                    |----------------------|                    */
 /******************************************************************/
 
-const MAX_PARTICLES = 20000,	 // The max amount of particles on-screen.
+const MAX_PARTICLES = 20000,	 	 // The max amount of particles on-screen.
 	  PARTICLES_PER_CLICK = 10;	 // The spawn amount of particles at click.
 
 var particles = [], 			 // Vector used to store and manage all the sand particles created.
-	texture,					 // The texture canvas for dynamical graphics changes.
-	textureData,				 // The raw texture informations.
-	UI;			    			 // A Phaser text instance for UI.
+	texture,			 // The texture canvas for dynamical graphics changes.
+	textureData,			 // The raw texture informations.
+	UI;			    	 // A Phaser text instance for UI.
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -107,7 +107,7 @@ function simulationUpdate()
 			for(i = 0; i < PARTICLES_PER_CLICK; i++) {		
 				if(particles.length < MAX_PARTICLES) {	
 					let p = new Sand(mouseX, mouseY);	  // Create a new particle.
-					particles.push(p);				  	  // Add the particle to the particles vector.
+					particles.push(p);			  // Add the particle to the particles vector.
 				}
 			}
 		} 
@@ -242,19 +242,19 @@ class Sand extends Particle{
 		
 		// While falling:
 		for(i = this.y; i <= this.y + this.gravity; i++) {		
-			if(this.pCheck(this.x, i)) { 							// If encounter another particle:
-				if(i == this.y) {										// If are in the same position:
+			if(this.pCheck(this.x, i)) { 				// If encounter another particle:
+				if(i == this.y) {						// If are in the same position:
 					var rndX = Math.round(Math.random());			
 					this.x = rndX == 1 ? this.x + 1 : this.x - 1;		// Randomly shift self X position.
-					this.y = i - 1;										// Set the position on top of the other particle.
+					this.y = i - 1;				// Set the position on top of the other particle.
 				} 
 				
-				this.gravity = 0;									// Reset fall speed.
+				this.gravity = 0;				// Reset fall speed.
 				break;	
 			}
 		}
 		
-		this.y += this.gravity;										// Increase Y position by falling speed.
+		this.y += this.gravity;						// Increase Y position by falling speed.
 	
 		//Mantain the position inside the game screen.
 		this.x = Phaser.Math.Clamp(this.x, 0, simulation.config.width - 1);
